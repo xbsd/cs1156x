@@ -1,0 +1,17 @@
+{
+    "contents" : "\nsource(\"hw1_hw2_source.R\")\nnum_pts = 100\nnum_iterations = 1000\ne_in = 0\ngenerated = data.generate(n=num_pts)\n\n\nfor (i in 1:num_iterations) {\n  generated = data.generate(n=num_pts)\n  \n  new_mat = as.matrix(cbind(x0=1, generated$data[,1:2]))\n  \n  mat_inv = solve((t(new_mat) %*% new_mat)) %*% t(new_mat)  \n  w = mat_inv %*% generated$data[,3]\n  h_y = as.vector(sign(t(w) %*% as.matrix(t(as.matrix(new_mat)))))\n  \n  e_in = e_in + sum(generated$data$y != h_y) / num_pts\n  \n}\n\naverage_e_in = e_in / num_iterations\n\nprobability <- numeric(0)\n\ntest_points = 1000\n\nfor (k in 1:num_iterations){\nnew.data <- data.gen2(n = test_points)  #  generating the test points for examining out-of-sample performance\nf  <-  as.numeric(new.data$x1 * generated$slope + generated$intercept > new.data$x2) * 2 - 1  # classifying points according to the true function f\ng  <-  as.numeric(new.data$x1 * (-w[2]/w[3]) - w[1]/w[3] > new.data$x2) * 2 - 1  # classifying points according to the hypothesised function g, using the \n# final weights provided by PLA            \n\nprobability[k] <- sum(f!=g)/test_points  # store the misclassification errors from each run\n}\n\ncat (\"Answer 5: Average e_in is\", average_e_in, \"and average e_out is\", mean(probability))\n\n\n\n\n",
+    "created" : 1413141132306.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3857332616",
+    "id" : "1CE75C05",
+    "lastKnownWriteTime" : 1413330552,
+    "path" : "~/Documents/study/edX/cs1156x/rsolutions/hw2_q5_q6.R",
+    "project_path" : "hw2_q5_q6.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

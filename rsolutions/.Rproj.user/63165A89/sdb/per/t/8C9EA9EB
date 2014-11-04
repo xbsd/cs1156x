@@ -1,0 +1,17 @@
+{
+    "contents" : "\nsource(\"hw1_hw2_source.R\")\n\nnum_pts = 1000\nnum_iterations = 1000\n\ne_in = 0\ngenerated = data.generate(n=num_pts)\n\nfor (i in 1:num_iterations) {\n  \n\nnew_mat = as.matrix(cbind(x0=1, generated$data[,1:2]))  \nf_y = sign(new_mat[,2]**2 + new_mat[,3]**2 - 0.6) # Uses custom f(x) per Q8\n\nnoise_indices = sample(num_iterations, 0.10*num_iterations)\nf_y[noise_indices] = f_y[noise_indices]*-1\n\nmat_inv = solve((t(new_mat) %*% new_mat)) %*% t(new_mat)  \nw = mat_inv %*% generated$data[,3]\nh_y = as.vector(sign(t(w) %*% t(new_mat)))\n\ne_in = e_in + sum(f_y != h_y) / num_pts\n\n}\n\naverage_e_in = e_in/num_iterations\n\ncat (\"Average e in\", average_e_in)\n",
+    "created" : 1413145899423.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3850685460",
+    "id" : "8C9EA9EB",
+    "lastKnownWriteTime" : 1413330552,
+    "path" : "~/Documents/study/edX/cs1156x/rsolutions/hw2_q8.R",
+    "project_path" : "hw2_q8.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
