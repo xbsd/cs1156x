@@ -1,7 +1,15 @@
 
 library(e1071)
 library(data.table)
-setwd("~/Documents/study//edX/cs1156x/")
+
+# Initial - Creation of RDS Files, Uncomment and Run only once
+# train <- data.table(read.table("http://www.amlbook.com/data/zip/features.train", header = FALSE))
+# test <- data.table(read.table("http://www.amlbook.com/data/zip/features.test", header = FALSE))
+# setnames(train, c("digit", "symmetry", "intensity"))
+# setnames(test, c("digit", "symmetry", "intensity"))
+# saveRDS(train, "train_hw8.rds")
+# saveRDS(test, "test_hw8.rds")
+
 
 # Question 1, 2
 
